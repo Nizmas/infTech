@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/index.js" asp-append-version="true"></script>
+<script src="~/js/touch.js" asp-append-version="true"></script>
+
+<div class="text-center">
+    <div class="control_panel">
+        <button class="panelBtns" id="folderAdd">Создать папку</button> 
+        <button class="panelBtns" id="fileUpload">Загрузить файл</button> <button class="panelBtns" id="fileDownload">Скачать файл</button> 
+        <button class="panelBtns" id="delete">Удалить</button> <button class="panelBtns" id="rename">Переименовать</button> 
+        <button class="panelBtns" id="extAdd">Новое расширение</button> <button class="panelBtns" id="extDel">Удалить расширение</button> <br/><br/>
+    </div>
+    
+    <div class="tree">
+        <button class="foldersBtn" onclick=SelectFolder(@ViewBag.Project.FolderId) ondblclick=OpenFolder(@ViewBag.Project.FolderId)>@ViewBag.Project.FolderName </button>
+        <div id="folder1" class="folder_place"></div>
+    </div>
+
+    <div class="txt_redactor">
+        <hr/>
+        <textarea id="edit_file"></textarea>
+    </div>
+
+    <div class="inputForm" id="extAddForm">
+        <form asp-action="AddFile" asp-controller="Extension" method="post" enctype="multipart/form-data"  >
+            <p>Новое расширение:</p>
+            <input type="text" name="uploadedName" required placeholder="txt" title="без точки"/><br/><br/>
+            <input type="file" name="uploadedFile" accept="image/jpeg" required/><br/><br/>
+            <input type="submit" value="Добавить"/><br/><br/>
+        </form>
+        <button class="formCancel">Отмена</button>
+    </div>
+    
+    <div class="inputForm" id="extDelForm">
+        <div id="extListBlock"></div>
+        <button id="extDelBtn">Удалить</button>
+        <button class="formCancel">Отмена</button>
+    </div>
+    
+    <div class="inputForm" id="folderAddForm">
+        <input type="text" id="newFolderName" required/>
+        <button id="folderAddBtn">Создать</button>
+        <button class="formCancel">Отмена</button>
+    </div>
+    
+    <div class="inputForm" id="fileAddForm">
+        <p>Новой файл:</p>
+        <input type="text" id="descriptionForm" placeholder="Описание" title="Краткое описание файла"/><br/><br/>
+        <input type="file" id="fileSelectedForm" required/><br/><br/>
+        <button id="fileUploadBtn">Отправка</button><br/><br/>
+        <button class="formCancel">Отмена</button>
+    </div>
+    
+    <div class="inputForm" id="nameAddForm">
+        <input type="text" id="newName" required title="Название файла без расширения"/>
+        <button id="nameAddBtn">Переименовать</button>
+        <button class="formCancel">Отмена</button>
+    </div>
+</div>
+
+
+

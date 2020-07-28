@@ -2,14 +2,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace InfTechWeb.Models
 {
-    public class ExtensionModel
+    public class FileModel
     {
+        public int FileId { get; set; }
+        public string FileName { get; set; }
+        public string FileDescription { get; set; }
         public int ExtensionId { get; set; }
-        
-        [Display(Name = "Название:")]
-        [Required(ErrorMessage = "Обязательное поле")]
-        [RegularExpression("^[a-z]{2,10}$" , ErrorMessage = "Некорректное расширение")]
-        public string ExtensionName { get; set; }
-        public byte[] ExtensionIco { get; set; }
+        public int FolderId { get; set; }
+        public string FileContent { get; set; }
     }
 }

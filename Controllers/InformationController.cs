@@ -13,23 +13,10 @@ using Microsoft.AspNetCore.Http;
 
 namespace InfTechWeb.Controllers
 {
-    public class HomeController : Controller
+    public class InformationController : Controller
     {
         public IActionResult Index()
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                var folders = db.Folders.ToList();
-                Console.WriteLine("Список объектов:");
-                foreach (FoldersModel fu in folders)
-                {
-                    Console.WriteLine($"{fu.FolderId}.{fu.FolderName} - {fu.ParFolderId}");
-                    if (fu.ParFolderId == 0)
-                    {
-                        ViewBag.Project = fu;
-                    }
-                }
-            }
             return View();
         }
     }

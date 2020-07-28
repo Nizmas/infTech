@@ -1,0 +1,29 @@
+CREATE DATABASE inftech;
+USE inftech;
+DROP TABLE folders;
+DROP TABLE extensions;
+DROP TABLE files;
+CREATE TABLE folders(
+folderid INT PRIMARY KEY IDENTITY,
+foldername NVARCHAR(25) CHECK(foldername != ''),
+parfolderid INT);
+INSERT INTO folders(foldername, parfolderid) VALUES ('Project', 0); 
+INSERT INTO folders(foldername, parfolderid) VALUES ('Bin', 1); 
+INSERT INTO folders(foldername, parfolderid) VALUES ('Debug', 2); 
+CREATE TABLE extensions(
+extensionid INT PRIMARY KEY IDENTITY,
+extensionname NVARCHAR(25) CHECK(extensionname != ''),
+extensionico BINARY(8000));
+INSERT INTO extensions(extensionname) VALUES ('txt'); 
+CREATE TABLE files(
+fileid  INT PRIMARY KEY IDENTITY,
+filename NVARCHAR(25) CHECK(filename != ''),
+filedescription NVARCHAR(100),
+extensionid INT,
+folderid INT,
+filecontent NVARCHAR(MAX),
+FOREIGN KEY (extensionid) REFERENCES extensions (extensionid),
+FOREIGN KEY (folderid) REFERENCES folders (folderid));
+INSERT INTO files(filename, filedescription, extensionid, folderid, filecontent) VALUES ('App', 'Кириллица', 1, 1, 'тут важная информация'); 
+INSERT INTO files(filename, filedescription, extensionid, folderid, filecontent) VALUES ('file', 'Описание к файлу file', 1, 2, 'Хз какая информация тут должна быть, но пока есть только такая'); 
+INSERT INTO files(filename, filedescription, extensionid, folderid, filecontent) VALUES ('file', 'ООП — сложная, но эффективная парадигма программирования', 1, 2, 'Идеологически ООП — подход к программированию как к моделированию информационных объектов, решающий на новом уровне основную задачу структурного программирования: структурирование информации с точки зрения управляемости[2], что существенно улучшает управляемость самим процессом моделирования, что, в свою очередь, особенно важно при реализации крупных проектов.');
